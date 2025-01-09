@@ -6,6 +6,11 @@
 #include "switch.h"
 #include "disp.h"
 
+
+//#define tick_fun HAL_GetTick
+#define tick_fun xTaskGetTickCount
+
+
 extern LTDC_HandleTypeDef hltdc;
 
 #define check_switch()\
@@ -109,8 +114,8 @@ char state16_string[] = {0xd2, 0xe5, 0xec, 0xef, 0xe5, 0xf0, 0xe0, 0xf2, 0xf3, 0
 //                        С     т     е     п     е     н     ь     _     в     е     р     т     и     к     а     л     ь     н     о     й     _     у     с     т     о     й     ч     и     в     о     с     т     и
 char state17_string[] = {0xd1, 0xf2, 0xe5, 0xef, 0xe5, 0xed, 0xfc, 0xbf, 0xe2, 0xe5, 0xf0, 0xf2, 0xe8, 0xea, 0xe0, 0xeb, 0xfc, 0xed, 0xee, 0xe9, 0xbf, 0xf3, 0xf1, 0xf2, 0xee, 0xe9, 0xf7, 0xe8, 0xe2, 0xee, 0xf1, 0xf2, 0xe8, 0x0};
 
-//                          2     0     .     2     7     _     C    dgr
-char state10_string_2[] = {0x32, 0x30, 0x2e, 0x32, 0x37, 0xbf, 0xd1, 0xb7, 0x0};
+//                          2     0     .     2     7     _     dgr   C
+char state10_string_2[] = {0x32, 0x30, 0x2e, 0x32, 0x37, 0xbf, 0xb7, 0xd1, 0x0};
 //                          0     .     2     5     _     M     /     C
 char state11_string_2[] = {0x30, 0x2e, 0x32, 0x35, 0xbf, 0xcc, 0x2f, 0xd1, 0x0};
 //                          3     0     3     .     4     2     _     г     р      а     д    .     
@@ -125,8 +130,8 @@ char state13_string_2[] = {0x30, 0x2e, 0x30, 0x33, 0xbf, 0xcc, 0x2f, 0xd1, 0x0};
 char state14_string_2[] = {0x37, 0x30, 0x2e, 0x34, 0x33, 0xbf, 0x25, 0x0};
 //                          7     5     8     .     5     2     _     м     м     .     р     т     .     с     т
 char state15_string_2[] = {0x37, 0x35, 0x38, 0x2e, 0x35, 0x32, 0xbf, 0xec, 0xec, 0x2e, 0xf0, 0xf2, 0x2e, 0xf1, 0xf2, 0x0};
-//                          0     .     0     0     _     C     dgr
-char state16_string_2[] = {0x30, 0x2e, 0x30, 0x30, 0xbf, 0xd1, 0xb7, 0x0};
+//                          0     .     0     0     _     dgr   C 
+char state16_string_2[] = {0x30, 0x2e, 0x30, 0x30, 0xbf, 0xb7, 0xd1, 0x0};
 //                          Ш     Т     И     Л     Ь
 char state17_string_2[] = {0xd8, 0xd2, 0xc8, 0xcb, 0xdc, 0x0};
 
@@ -176,7 +181,7 @@ void state_machine(){
 				system_state = 1;
 				need_out = 1;
 
-				state_time = HAL_GetTick();
+				state_time = tick_fun();
 			}
 			break;
 		}
@@ -188,10 +193,10 @@ void state_machine(){
 				need_out = 0;
 			}
 
-			if(HAL_GetTick() - state_time >= 1000){
+			if(tick_fun() - state_time >= 1000){
 				system_state = 2;
 				need_out = 1;
-				state_time = HAL_GetTick();
+				state_time = tick_fun();
 			}
 
 			check_brightness();
@@ -207,7 +212,7 @@ void state_machine(){
 			}
 
 
-			if(HAL_GetTick() - state_time >= 1000){
+			if(tick_fun() - state_time >= 1000){
 				system_state = 3;
 				need_out = 1;
 
@@ -245,8 +250,8 @@ void state_machine(){
 				print_rectangle_empty(100, 150, 280, 10, 0x797);
 				need_out = 0;
 			}
-			if(!state_time){state_time = HAL_GetTick();}else{
-				if(HAL_GetTick() - state_time >= 300){
+			if(!state_time){state_time = tick_fun();}else{
+				if(tick_fun() - state_time >= 300){
 					state_time = 0;
 					state_progress += 10;
 				}
@@ -295,8 +300,8 @@ void state_machine(){
 
 			}
 
-			if(!state_time){state_time = HAL_GetTick();}else{
-				if(HAL_GetTick() - state_time >= 300){
+			if(!state_time){state_time = tick_fun();}else{
+				if(tick_fun() - state_time >= 300){
 					state_time = 0;
 					state_progress += 10;
 				}
@@ -330,15 +335,15 @@ void state_machine(){
 				mem_sp_st = sp_st;
 			}else{
 				if(mem_sp_st > sp_st){
-					if(((int32_t)(system_angle - (mem_sp_st - sp_st))) >= 0){
-						system_angle -= mem_sp_st - sp_st;
+					if(((int32_t)(system_angle - (mem_sp_st - sp_st)*2)) >= 0){
+						system_angle -= (mem_sp_st - sp_st)*2;
 					}
 					print_rectangle(180, 130, 100, 40, 0);
 					print_number(180, 130, system_angle, 0x797, 2);
 					mem_sp_st = 0;
 				}else if(mem_sp_st < sp_st){
-					if(system_angle + sp_st - mem_sp_st <= 360){
-						system_angle += sp_st - mem_sp_st;
+					if(system_angle + (sp_st - mem_sp_st)*2 <= 360){
+						system_angle += (sp_st - mem_sp_st)*2;
 					}
 					print_rectangle(180, 130, 20, 20, 0);
 					print_number(180, 130, system_angle, 0x797, 2);
@@ -366,8 +371,8 @@ void state_machine(){
 
 			}
 
-			if(!state_time){state_time = HAL_GetTick();}else{
-				if(HAL_GetTick() - state_time >= 300){
+			if(!state_time){state_time = tick_fun();}else{
+				if(tick_fun() - state_time >= 300){
 					state_time = 0;
 					state_progress += 10;
 				}
@@ -517,7 +522,8 @@ void state_machine(){
 			break;			
 		}																				
 	}
-
 }
+
+
 
 #endif

@@ -5,7 +5,7 @@
 #include <string.h>
 
 #define SCRWIDTH 480
-#define SCRHEIGHT 270
+#define SCRHEIGHT 272
 
 
 uint16_t framebuf[SCRWIDTH*SCRHEIGHT] = {0};
@@ -214,6 +214,16 @@ void print_string_scaled_y(uint32_t x, uint32_t y, char* string, uint16_t color,
 		//y += 16*scale;
 	}
 }
+
+// 51
+// 43
+// 480
+// 8
+//
+// 16
+// 12
+// 272
+// 4
 
 void fill_screen(uint16_t color){for(uint16_t* i = framebuf; i < framebuf+SCRWIDTH*SCRHEIGHT; i++){*i = color;}}
 
