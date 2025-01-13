@@ -840,7 +840,7 @@ osStatus_t osDelay (uint32_t ticks) {
     stat = osOK;
 
     if (ticks != 0U) {
-      vTaskDelay(pdMS_TO_TICKS(ticks));
+      vTaskDelay(ticks);
     }
   }
 
