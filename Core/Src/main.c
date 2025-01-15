@@ -760,12 +760,12 @@ void StartDefaultTask(void *argument)
 
 osDelay(1);
 
-  if(tcp_ether_init()!=0){
-  	print_string(10, 40, "ETHERNET FAILURE!", 0x797);
-  }else{
-  	print_string(10, 40, "ETHERNET SUCCESS!", 0x797);
-  	inf_loop();
-  }
+  // if(tcp_ether_init()!=0){
+  // 	print_string(10, 40, "ETHERNET FAILURE!", 0x797);
+  // }else{
+  // 	print_string(10, 40, "ETHERNET SUCCESS!", 0x797);
+  // 	inf_loop();
+  // }
 
 	//inf_loop();
 
