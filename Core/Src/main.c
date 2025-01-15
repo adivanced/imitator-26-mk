@@ -57,13 +57,20 @@ const osThreadAttr_t defaultTask_attributes = {
   .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+/* Definitions for myTask */
+osThreadId_t myTaskHandle;
+const osThreadAttr_t myTask_attributes = {
+  .name = "myTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 /* USER CODE BEGIN PV */
 void inf_loop(){
 	print_string(10, 40, "TEST!", 0x797);
 
 	for(;;){
 		state_machine();
-		state_ether();
+		//state_ether();
 		osDelay(1);
 	}
 }
@@ -74,6 +81,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_LTDC_Init(void);
 void StartDefaultTask(void *argument);
+void StartTaskEtherStates(void *argument);
 
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
@@ -139,6 +147,9 @@ int main(void)
   /* Create the thread(s) */
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+
+  /* creation of myTask */
+  myTaskHandle = osThreadNew(StartTaskEtherStates, NULL, &myTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -760,12 +771,6 @@ void StartDefaultTask(void *argument)
 
 osDelay(1);
 
-  // if(tcp_ether_init()!=0){
-  // 	print_string(10, 40, "ETHERNET FAILURE!", 0x797);
-  // }else{
-  // 	print_string(10, 40, "ETHERNET SUCCESS!", 0x797);
-  // 	inf_loop();
-  // }
 
 	//inf_loop();
 
@@ -777,6 +782,30 @@ osDelay(1);
     osDelay(1);
   }
   /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_StartTaskEtherStates */
+/**
+* @brief Function implementing the myTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_StartTaskEtherStates */
+void StartTaskEtherStates(void *argument)
+{
+  /* USER CODE BEGIN StartTaskEtherStates */
+	if(tcp_ether_init()!=0){
+		print_string(10, 40, "ETHERNET FAILURE!", 0x797);
+	}else{
+		print_string(10, 40, "ETHERNET SUCCESS!", 0x797);
+		inf_loop();
+	}
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END StartTaskEtherStates */
 }
 
 /**
