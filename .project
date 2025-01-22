@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>imitator-2</name>
+	<name>LwIP_HTTP_Server_Netconn_RTOS</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,8 +16,9 @@
 			<triggers>full,incremental,</triggers>
 			<arguments>
 			</arguments>
-		</buildCommand>
+		</buildCommand>		
 	</buildSpec>
+	<natures>
 	<natures>
 		<nature>com.st.stm32cube.ide.mcu.MCUProjectNature</nature>
 		<nature>com.st.stm32cube.ide.mcu.MCUCubeProjectNature</nature>
@@ -28,5 +29,6 @@
 		<nature>com.st.stm32cube.ide.mcu.MCURootProjectNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+	</natures>		
 	</natures>
 </projectDescription>

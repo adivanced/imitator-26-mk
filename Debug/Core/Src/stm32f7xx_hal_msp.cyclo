@@ -1,3 +1,0 @@
-stm32f7xx_hal_msp.c:63:6:HAL_MspInit	1
-stm32f7xx_hal_msp.c:92:6:HAL_LTDC_MspInit	3
-stm32f7xx_hal_msp.c:211:6:HAL_LTDC_MspDeInit	2
