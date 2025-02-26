@@ -112,6 +112,10 @@ void DebugMon_Handler(void)
   */
 void SysTick_Handler(void)
 {
+  get_current_keyboard_state();
+  get_current_spinner_button_state();
+  get_spinner_position_change();
+  get_current_switch_state();
   osSystickHandler();
 }
 

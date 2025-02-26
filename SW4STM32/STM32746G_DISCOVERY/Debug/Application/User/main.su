@@ -17,13 +17,13 @@
 ../../../Inc/spinner.h:59:6:get_spinner_position_change	8	static
 ../../../Inc/switch.h:9:6:switch_GPIO_init	32	static
 ../../../Inc/switch.h:19:6:get_current_switch_state	8	static
-../../../Inc/logic.h:147:6:print_fat_rectangle	24	static
-../../../Inc/logic.h:165:6:state_machine	40	static
+../../../Inc/logic.h:148:6:print_fat_rectangle	24	static
+../../../Inc/logic.h:163:6:state_machine	40	static
 ../../../Inc/modbus.h:29:9:get_coil_val	0	static
 ../../../Inc/modbus.h:49:10:get_holding_reg_val	24	static
 ../../../Inc/modbus.h:140:10:nmbs_crc_calc	12	static
 ../../../Inc/modbus.h:158:10:mb_process	16	static
 ../../../Inc/ether.h:15:5:tcp_ether_init	16	static
-../../../Inc/ether.h:33:6:state_ether	24	static
 /home/adivanced/Documents/STM32Projects/LwIP_HTTP_Server_Netconn_RTOS/Src/main.c:114:13:StartThread	56	static
-/home/adivanced/Documents/STM32Projects/LwIP_HTTP_Server_Netconn_RTOS/Src/main.c:65:5:main	80	static,ignoring_inline_asm
+../../../Inc/ether.h:33:6:state_ether	24	static
+/home/adivanced/Documents/STM32Projects/LwIP_HTTP_Server_Netconn_RTOS/Src/main.c:65:5:main	112	static,ignoring_inline_asm

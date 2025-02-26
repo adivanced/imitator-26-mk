@@ -89,6 +89,11 @@ Application/User/ethernetif.o: \
  ../../../Drivers/BSP/STM32746G-Discovery/../Components/lan8742/lan8742.h \
  ../../../Middlewares/Third_Party/LwIP/src/include/lwip/netifapi.h \
  ../../../Middlewares/Third_Party/LwIP/src/include/lwip/dhcp.h \
+ ../../../Middlewares/Third_Party/LwIP/src/include/lwip/udp.h \
+ ../../../Middlewares/Third_Party/LwIP/src/include/lwip/ip.h \
+ ../../../Middlewares/Third_Party/LwIP/src/include/lwip/ip6.h \
+ ../../../Middlewares/Third_Party/LwIP/src/include/lwip/prot/ip.h \
+ ../../../Middlewares/Third_Party/LwIP/src/include/lwip/prot/udp.h \
  ../../../Middlewares/Third_Party/LwIP/src/include/lwip/autoip.h \
  ../../../Middlewares/Third_Party/LwIP/src/include/lwip/priv/tcpip_priv.h \
  ../../../Middlewares/Third_Party/LwIP/src/include/lwip/priv/api_msg.h \
@@ -184,6 +189,11 @@ Application/User/ethernetif.o: \
 ../../../Drivers/BSP/STM32746G-Discovery/../Components/lan8742/lan8742.h:
 ../../../Middlewares/Third_Party/LwIP/src/include/lwip/netifapi.h:
 ../../../Middlewares/Third_Party/LwIP/src/include/lwip/dhcp.h:
+../../../Middlewares/Third_Party/LwIP/src/include/lwip/udp.h:
+../../../Middlewares/Third_Party/LwIP/src/include/lwip/ip.h:
+../../../Middlewares/Third_Party/LwIP/src/include/lwip/ip6.h:
+../../../Middlewares/Third_Party/LwIP/src/include/lwip/prot/ip.h:
+../../../Middlewares/Third_Party/LwIP/src/include/lwip/prot/udp.h:
 ../../../Middlewares/Third_Party/LwIP/src/include/lwip/autoip.h:
 ../../../Middlewares/Third_Party/LwIP/src/include/lwip/priv/tcpip_priv.h:
 ../../../Middlewares/Third_Party/LwIP/src/include/lwip/priv/api_msg.h:

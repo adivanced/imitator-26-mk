@@ -119,25 +119,31 @@ static void StartThread(void const * argument)
   /* Initialize the LwIP stack */
   Netif_Config();
   
+
   /* Initialize webserver demo */
   //http_server_netconn_init();
 
   // init tcp-modbus
   // BSP_LCD_SetTextColor(0x797);
-  // BSP_LCD_DrawRect(20, 20, 40, 40);
+  //BSP_LCD_DrawRect(20, 20, 40, 40);
   // ARGB - A R G B
-  //print_string(10, 10, state17_string_2, 0xFF00FFFF);
-  if(tcp_ether_init() != 0){
-    for(;;){
-      print_string(10, 10, "ETHERNET FAILURE", 0xFFFF0000);
-    }
-  }
 
+
+
+  // if(tcp_ether_init() != 0){
+  //   for(;;){
+  //     print_string(10, 10, "ETHERNET FAILURE", 0xFFFF0000);
+  //   }
+  // }
+
+
+  tcp_ether_init();
 
   for(;;){
     state_machine();
-    state_ether();
+    //state_ether();
     //fill_screen(0x797);
+
 
     osDelay(10);
   }
@@ -155,15 +161,10 @@ static void Netif_Config(void)
   ip_addr_t netmask;
   ip_addr_t gw;
 
-#if LWIP_DHCP
-  ip_addr_set_zero_ip4(&ipaddr);
-  ip_addr_set_zero_ip4(&netmask);
-  ip_addr_set_zero_ip4(&gw);
-#else
+
   IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
   IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
   IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
-#endif /* LWIP_DHCP */
 
   /* add the network interface */
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
@@ -180,11 +181,6 @@ static void Netif_Config(void)
   osThreadCreate (osThread(EthLink), &gnetif);
 #endif
 
-#if LWIP_DHCP
-  /* Start DHCPClient */
-  osThreadDef(DHCP, DHCP_Thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
-  osThreadCreate (osThread(DHCP), &gnetif);
-#endif
 }
 
 /**
@@ -211,16 +207,14 @@ static void BSP_Config(void)
   LCD_LOG_Init();
   
   /* Show Header and Footer texts */
-  //LCD_UsrLog ((char *)"  Waiting ethernet connection...\n");
-  LCD_LOG_SetHeader((uint8_t *)"Webserver Application Netconn API");
-  LCD_LOG_SetFooter((uint8_t *)"STM32746G-DISCO board");
+  LCD_UsrLog ((char *)"  Waiting ethernet connection...\n");
+ LCD_LOG_SetHeader((uint8_t *)"Webserver Application Netconn API");
+ LCD_LOG_SetFooter((uint8_t *)"STM32746G-DISCO board");
   
-  LCD_UsrLog ((char *)"  State: Ethernet Initialization ...\n");
+ LCD_UsrLog ((char *)"  State: Ethernet Initialization ...\n");
 
 #else
   /* Configure LED1 and LED2 */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
 
 #endif /* USE_LCD */
 }
@@ -282,7 +276,15 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE();
 }
 
 /**

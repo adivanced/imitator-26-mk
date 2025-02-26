@@ -82,6 +82,7 @@ void get_current_keyboard_state(){
 			if(HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_3) == GPIO_PIN_SET){if(key_count[0][1]<KEY_COUNT_BOUNDRY+KEY_COUNT_BOUNDRY/2){key_count[0][1]++;}}else{if(key_count[0][1]){key_count[0][1]--;}}
 			if(HAL_GPIO_ReadPin(GPIOI, GPIO_PIN_2) == GPIO_PIN_SET){if(key_count[0][2]<KEY_COUNT_BOUNDRY+KEY_COUNT_BOUNDRY/2){key_count[0][2]++;}}else{if(key_count[0][2]){key_count[0][2]--;}}
 
+
 			if(key_count[0][0] >= KEY_COUNT_BOUNDRY){keyboard_state|=BUTTON_TEST;}else{keyboard_state&=~BUTTON_TEST;}
 			if(key_count[0][1] >= KEY_COUNT_BOUNDRY){keyboard_state|=BUTTON_AIR_TEMPERATURE;}else{keyboard_state&=~BUTTON_AIR_TEMPERATURE;}
 			if(key_count[0][2] >= KEY_COUNT_BOUNDRY){keyboard_state|=BUTTON_AIR_HUMIDITY;}else{keyboard_state&=~BUTTON_AIR_HUMIDITY;}

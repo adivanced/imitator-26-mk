@@ -81,6 +81,7 @@ uint32_t system_state = 0;
 
 
 
+
 //                       П     Р      О     В     Е     Р     К     А    _      А     П     П    А      Р     А     Т     У     Р     Ы    
 char state1_string[] = {0xcf, 0xd0, 0xce, 0xc2, 0xc5, 0xd0, 0xca, 0xc0, 0xbf, 0xc0, 0xcf, 0xcf, 0xc0, 0xd0, 0xc0, 0xd2, 0xd3, 0xd0, 0xdb, 0x0};
 //                       Г      О     Т     О     В     Н     О     С     Т     Ь     _     А     П     П    А      Р     А     Т     У     Р     Ы    
@@ -159,9 +160,6 @@ void print_fat_rectangle(){
 }
 
 
-
-
-
 void state_machine(){
 	uint32_t kbd_st = keyboard_state;
 	uint32_t sw_st = switch_state;
@@ -171,13 +169,16 @@ void state_machine(){
 
 	static uint32_t state_time = 0;
 
+	//char tststr[] = {0xc0 ,0x0};
+	//tststr[0] += system_state;
+	//print_string_scaled_y(115, 120, tststr, 0xFF00FFFF, 2);
+
 	switch(system_state){
 		case 0:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				need_out = 0;
 			}
-
 
 			if(sw_st){
 				system_state = 1;
@@ -189,7 +190,7 @@ void state_machine(){
 		}
 		case 1:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(115, 120, state1_string, 0xFF00FFFF, 2);
 				need_out = 0;
@@ -207,7 +208,7 @@ void state_machine(){
 		}
 		case 2:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(115, 120, state2_string, 0xFF00FFFF, 2);
 				need_out = 0;
@@ -227,7 +228,7 @@ void state_machine(){
 		}
 		case 3:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(90, 120, state3_string, 0xFF00FFFF, 2);
 				need_out = 0;
@@ -246,7 +247,7 @@ void state_machine(){
 		}
 		case 4:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled(185, 105, state4_string, 0xFF00FFFF, 2);
 				print_rectangle_empty(100, 150, 280, 10, 0xFF00FFFF);
@@ -275,7 +276,7 @@ void state_machine(){
 		}
 		case 5:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(120, 120, state5_string, 0xFF00FFFF, 2);
 				need_out = 0;
@@ -294,7 +295,7 @@ void state_machine(){
 		}
 		case 6:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(180, 100, state6_string, 0xFF00FFFF, 2);
 				print_rectangle_empty(100, 150, 280, 10, 0xFF00FFFF);
@@ -325,7 +326,7 @@ void state_machine(){
 		}
 		case 7:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(110, 90, state7_string, 0xFF00FFFF, 2);	
 				print_number(180, 130, system_angle, 0xFF00FFFF, 2);
@@ -365,7 +366,7 @@ void state_machine(){
 		}
 		case 8:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(180, 100, state8_string, 0xFF00FFFF, 2);
 				print_rectangle_empty(100, 150, 280, 10, 0xFF00FFFF);
@@ -396,7 +397,7 @@ void state_machine(){
 		}
 		case 9:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_fat_rectangle();
 				print_string_scaled_y(165, 105, state9_string, 0xFF00FFFF, 2);
 				need_out = 0;
@@ -410,7 +411,7 @@ void state_machine(){
 		}
 		case 10:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state10_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state10_string_2, 0xFF00FFFF, 3);
 				need_out = 0;
@@ -424,7 +425,7 @@ void state_machine(){
 		}
 		case 11:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state11_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state11_string_2, 0xFF00FFFF, 3);
 				need_out = 0;
@@ -438,7 +439,7 @@ void state_machine(){
 		}
 		case 12:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state12_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state12_string_2, 0xFF00FFFF, 3);
 				print_string_scaled_y(10, 145, state12_string_3, 0xFF00FFFF, 2);
@@ -455,7 +456,7 @@ void state_machine(){
 		}
 		case 13:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state13_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state13_string_2, 0xFF00FFFF, 3);
 				need_out = 0;
@@ -469,7 +470,7 @@ void state_machine(){
 		}
 		case 14:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state14_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state14_string_2, 0xFF00FFFF, 3);
 				need_out = 0;
@@ -483,7 +484,7 @@ void state_machine(){
 		}
 		case 15:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state15_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state15_string_2, 0xFF00FFFF, 2);
 				need_out = 0;
@@ -497,7 +498,7 @@ void state_machine(){
 		}
 		case 16:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state16_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state16_string_2, 0xFF00FFFF, 3);
 				need_out = 0;
@@ -511,7 +512,7 @@ void state_machine(){
 		}
 		case 17:{
 			if(need_out){
-				fill_screen(0);
+				fill_screen(0xFF000000);
 				print_string(10, 40, state17_string, 0xFF00FFFF);
 				print_string_scaled(10, 100, state17_string_2, 0xFF00FFFF, 3);
 				need_out = 0;

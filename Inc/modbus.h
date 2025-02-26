@@ -157,7 +157,7 @@ uint16_t nmbs_crc_calc(const uint8_t* data, uint32_t length) {
 
 uint16_t mb_process(char* mb_repl_buf, char* mb_req_buf, uint16_t req_buf_len){
 	memset(mb_repl_buf, '\0', MB_ADU_MAXSIZE);
-	char* MB_BUFFER = mb_repl_buf + 7;
+	char* MB_BUFFER = mb_repl_buf;
 
 	switch(mb_req_buf[1]){
 		case 3:{

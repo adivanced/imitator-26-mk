@@ -152,10 +152,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   */
 void TIM6_DAC_IRQHandler(void)
 {
-  get_current_keyboard_state();
-  get_current_spinner_button_state();
-  get_spinner_position_change();
-  get_current_switch_state();
   HAL_TIM_IRQHandler(&TimHandle);
 }
 
